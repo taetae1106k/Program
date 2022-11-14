@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content=
+			"width=device-width, initial-scale=1.0">
+		<title>Program</title>
+
+		<style>
+			body {
+				background-color: #12b6abd0;
+				font-family: Verdana;
+				text-align: center;
+			}
+
+			form {
+				background-color: #fff;
+				max-width: 500px;
+				margin: 50px auto;
+				padding: 30px 20px;
+				box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
+			}
+
+			.form-control {
+				text-align: left;
+				margin-bottom: 25px;
+			}
+
+			.form-control label {
+				display: block;
+				margin-bottom: 10px;
+			}
+
+			.form-control input,
+			.form-control select,
+			.form-control textarea {
+				border: 1px solid #777;
+				border-radius: 2px;
+				font-family: inherit;
+				padding: 10px;
+				display: block;
+				width: 95%;
+			}
+
+			.form-control input[type="radio"],
+			.form-control input[type="checkbox"] {
+				display: inline-block;
+				width: auto;
+			}
+
+			button {
+				background-color: #05c46b;
+				border: 1px solid #777;
+				border-radius: 2px;
+				font-family: inherit;
+				font-size: 21px;
+				display: block;
+				width: 100%;
+				margin-top: 50px;
+				margin-bottom: 20px;
+			}
+		</style>
+		<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+	</head>
+
+	<body>
+		<h1>Survey Form</h1>
+
+		<form id="form" onsubmit="getData()">
+
+			<div class="form-control">
+				<label for="name" id="label-name">
+					Name
+				</label>
+
+				<input type="text"
+					id="name"
+					placeholder="Enter your name"
+					minlength="2"
+					/>
+			</div>
+
+			<div class="form-control">
+				<label>What type of ride do you prefer?
+					<small>(Check all that apply)</small>
+				</label>
+				<label for="inp-1">
+					<input type="checkbox"
+						name="inp" id="extreme" onclick="checkExtreme();">Extreme Thrill</input></label>
+				<label for="inp-2">
+					<input type="checkbox"
+						name="inp" id="medium" onclick="checkMedium();">Medium Thrill</input></label>
+				<label for="inp-3">
+					<input type="checkbox"
+						name="inp" id="basic" onclick="checkBasic();">Basic</input></label>
+				<label for="inp-4">
+					<input type="checkbox"
+						name="inp" id="water" onclick="checkWater();">Water</input></label>
+			</div>
+			<div class="form-control">
+				<label>What type of show do you like?
+					<small>(Check all that apply)</small>
+				</label>
+				<label for="inp1">
+					<input type="checkbox"
+						name="inp" id ="magic" onclick="checkMagic();">Magic</input></label>
+				<label for="inp-6">
+					<input type="checkbox"
+						name="inp" id ="circus" onclick="checkCircus();">Circus/Acrobatics</input></label>
+				<label for="inp-7">
+					<input type="checkbox"
+						name="inp" id ="firework" onclick="checkFirework();">Firework</input></label>
+			</div>
+
+			<div class="form-control">
+				<label for="role" id="label-role">
+					Do you want souvenirs?
+				 </label>
+				
+				<select name="role" id="role" onchange="checkSouvenir();">
+					<option value="yes">Yes</option>
+					<option value="no">No</option>
+				</select>
+			</div>
+
+			<div class="form-control">
+				<label for="role" id="label-role-2">
+					Do you like hot dogs?
+				 </label>
+				
+				<select name="role" id="role-2" onchange="checkHot();">
+					<option value="yes">Yes</option>
+					<option value="no">No</option>
+				</select>
+			</div>
+
+			<div class="form-control">
+				<label for="role" id="label-role-3">
+					Do you like ice cream?
+				 </label>
+				
+				<select name="role" id="role-3" onchange="checkIce();">
+					<option value="yes">Yes</option>
+					<option value="no">No</option>
+				</select>
+			</div>
+
+			<div class="form-control">
+				<label for="role" id="label-role-4">
+					Do you like games(carnival games)?
+				 </label>
+				
+				<select name="role" id="role-4" onchange="checkGames();">
+					<option value="yes">Yes</option>
+					<option value="no">No</option>
+				</select>
+			</div>
+
+			<div class="form-control">
+				<label for="role" id="label-role1">
+					Would you like to go and eat at a restaurant?
+				 </label>
+				
+				<select name="role" id="role1" onchange="checkRest();">
+					<option value="yes">Yes</option>
+					<option value="no">No</option>
+				</select>
+			</div>
+
+			<button>
+				Submit
+			</button>
+			<div id="results"></div>
+			<div id="resultName"></div>
+			<div id="todo"></div>
+		</form>
+		<script>
+document.forms["form"].addEventListener("submit", e => {
+	e.preventDefault();
+	let text = $("#name").val();
+	$("#results").html("<b>RESULTS</b><br />");
+	$("#resultName").html("Name: " + text);
+});
+
+function checkExtreme() {
+	var extremeEl = document.getElementById("extreme");
+	if (extremeEl.checked) {
+		return true;
+	} else {
+		return false;
+	};
+};
+
+function checkMedium() {
+	var mediumEl = document.getElementById("medium");
+	if (mediumEl.checked) {
+		return true;
+	} else {
+		return false;
+	};
+};
+
+function checkBasic() {
+	var basicEl = document.getElementById("basic");
+	if (basicEl.checked) {
+		return true;
+	} else {
+		return false;
+	};
+};
+
+function checkWater() {
+	var waterEl = document.getElementById("water");
+	if (waterEl.checked) {
+		return true;
+	} else {
+		return false;
+	};
+};
+
+function checkCircus() {
+	var circusEl = document.getElementById("circus");
+	if (circusEl.checked) {
+		return true;
+	} else {
+		return false;
+	};
+};
+
+function checkFirework() {
+	var fireworkEl = document.getElementById("firework");
+	if (fireworkEl.checked) {
+		return true;
+	} else {
+		return false;
+	};
+};
+
+function checkMagic() {
+	var magicEl = document.getElementById("magic");
+	if (magicEl.checked) {
+		return true;
+	} else {
+		return false;
+	};
+};
+
+function checkSouvenir() {
+	var souvenirEl = document.getElementById("role");
+	if (souvenirEl.value === "yes") {
+		return true;
+	} else {
+		return false;
+	};
+};
+
+function checkHot() {
+	var hotEl = document.getElementById("role-2");
+	if (hotEl.value === "yes") {
+		return true;
+	} else {
+		return false;
+	};
+};
+
+function checkIce() {
+	var iceEl = document.getElementById("role-3");
+	if (iceEl.value === "yes") {
+		return true;
+	} else {
+		return false;
+	};
+};
+
+function checkGames() {
+	var gamesEl = document.getElementById("role-4");
+	if (gamesEl.value === "yes") {
+		return true;
+	} else {
+		return false;
+	};
+};
+
+function checkRest() {
+	var restEl = document.getElementById("role1");
+	if (restEl.value === "yes") {
+		return true;
+	} else {
+		return false;
+	};
+};
+
+var heptagon = {
+	wait: {
+		nineAM: 0,
+		ten: 10 / 30,
+		eleven: 20 / 30,
+		twelve: 30 / 30,
+		one: 40 / 30,
+		two: 40 / 30,
+		three: 30 / 30,
+		four: 30 / 30,
+		five: 20 / 30,
+		six: 20 / 30,
+		seven: 10 / 30,
+		eight: 10 / 30,
+		ninePM: 10 / 30
+	},
+	duration: 2.5
+};
+var decagon = {
+	wait: {
+		nineAM: 0,
+		ten: 15 / 30,
+		eleven: 30 / 30,
+		twelve: 45 / 30,
+		one: 60 / 30,
+		two: 75 / 30,
+		three: 75 / 30,
+		four: 60 / 30,
+		five: 45 / 30,
+		six: 30 / 30,
+		seven: 30 / 30,
+		eight: 15 / 30,
+		ninePM: 0
+	},
+	duration: 3
+};
+var rhombus = {
+	wait: {
+		nineAM: 0,
+		ten: 5 / 30,
+		eleven: 10 / 30,
+		twelve: 15 / 30,
+		one: 10 / 30,
+		two: 10 / 30,
+		three: 15 / 30,
+		four: 10 / 30,
+		five: 10 / 30,
+		six: 5 / 30,
+		seven: 5 / 30,
+		eight: 5 / 30,
+		ninePM: 5 / 30
+	},
+	duration: 4
+};
+var hexa = {
+	wait: {
+		nineAM: 0,
+		ten: 0,
+		eleven: 5 / 30,
+		twelve: 10 / 30,
+		one: 10 / 30,
+		two: 15 / 30,
+		three: 15 / 30,
+		four: 10 / 30,
+		five: 10 / 30,
+		six: 5 / 30,
+		seven: 0,
+		eight: 0,
+		ninePM: 0
+	},
+	duration: 2
+};
+var pentagon = {
+	wait: {
+		nineAM: 0,
+		ten: 0,
+		eleven: 5 / 30,
+		twelve: 5 / 30,
+		one: 5 / 30,
+		two: 10 / 30,
+		three: 10 / 30,
+		four: 10 / 30,
+		five: 10 / 30,
+		six: 5 / 30,
+		seven: 0,
+		eight: 0,
+		ninePM: 0
+	},
+	duration: 5
+};
+var square = {
+	wait: {
+		nineAM: 0,
+		ten: 0,
+		eleven: 5 / 30,
+		twelve: 10 / 30,
+		one: 10 / 30,
+		two: 10 / 30,
+		three: 10 / 30,
+		four: 10 / 30,
+		five: 10 / 30,
+		six: 5 / 30,
+		seven: 5 / 30,
+		eight: 5 / 30,
+		ninePM: 0
+	},
+	duration: 2.5
+};
+var concave = {
+	wait: {
+		nineAM: 0,
+		ten: 5 / 30,
+		eleven: 10 / 30,
+		twelve: 15 / 30,
+		one: 10 / 30,
+		two: 10 / 30,
+		three: 15 / 30,
+		four: 15 / 30,
+		five: 15 / 30,
+		six: 5 / 30,
+		seven: 5 / 30,
+		eight: 5 / 30,
+		ninePM: 5 / 30
+	},
+	duration: 15
+};
+var star = {
+	wait: {
+		nineAM: 0,
+		ten: 10 / 30,
+		eleven: 15 / 30,
+		twelve: 15 / 30,
+		one: 10 / 30,
+		two: 5 / 30,
+		three: 5 / 30,
+		four: 5 / 30,
+		five: 5 / 30,
+		six: 5 / 30,
+		seven: 5 / 30,
+		eight: 5 / 30,
+		ninePM: 0
+	},
+	duration: 3
+};
+var dodecagon = {
+	wait: {
+		nineAM: 0,
+		ten: 0,
+		eleven: 5 / 30,
+		twelve: 10 / 30,
+		one: 15 / 30,
+		two: 20 / 30,
+		three: 15 / 30,
+		four: 10 / 30,
+		five: 5 / 30,
+		six: 0,
+		seven: 0,
+		eight: 0,
+		ninePM: 0
+	},
+	duration: 10
+};
+var octagon = {
+	wait: {
+		nineAM: 0,
+		ten: 10 / 30,
+		eleven: 10 / 30,
+		twelve: 10 / 30,
+		one: 30 / 30,
+		two: 60 / 30,
+		three: 60 / 30,
+		four: 60 / 30,
+		five: 30 / 30,
+		six: 10 / 30,
+		seven: 10 / 30,
+		eight: 0,
+		ninePM: 0
+	},
+	duration: 5
+};
+var hot = {
+	wait: {
+		nineAM: null,
+		ten: 0,
+		eleven: 5 / 30,
+		twelve: 10 / 30,
+		one: 10 / 30,
+		two: 5 / 30,
+		three: 0,
+		four: 5 / 30,
+		five: 10 / 30,
+		six: 10 / 30,
+		seven: 10 / 30,
+		eight: 5 / 30,
+		ninePM: 5 / 30
+	}
+};
+var ice = {
+	wait: {
+		nineAM: null,
+		ten: null,
+		eleven: 0,
+		twelve: 5 / 30,
+		one: 10 / 30,
+		two: 15 / 30,
+		three: 15 / 30,
+		four: 10 / 30,
+		five: 5 / 30,
+		six: 5 / 30,
+		seven: 5 / 30,
+		eight: 0,
+		ninePM: 0
+	}
+};
+var rest = {
+	wait: {
+		nineAM: 0,
+		ten: 5 / 30,
+		eleven: 30 / 30,
+		twelve: 60 / 30,
+		one: 20 / 30,
+		two: 0,
+		three: 0,
+		four: 10 / 30,
+		five: 40 / 30,
+		six: 60 / 30,
+		seven: 10 / 30,
+		eight: 0,
+		ninePM: null
+	},
+	duration: 45
+};
+var souvenir = {};
+var games = {};
+var firework = {
+	time: "eight",
+	duration: 60
+};
+var magic = {
+	time: [
+		"two",
+		"eight"
+	],
+	duration: 60
+};
+var circus = {
+	time: [
+		"ten",
+		"twelve",
+		"four"
+	],
+	duration: 60
+};
+var time = 9;
+// wc
+var wcRest = 5;
+var wcShow = 5;
+var wcStar = 2;
+var wcSquare = 2;
+var wcRhombus = 4;
+var wcPentagon = 5;
+var wcOctagon = 4;
+var wcIce = 3;
+var wcHot = 3;
+var wcHexa = 4;
+var wcHeptagon = 5;
+var wcSouvenir = 4;
+var wcGames = 2;
+var wcEnter = 5;
+var wcDodecagon = 5;
+var wcDecagon = 3;
+var wcConcave = 4;
+// rest
+var restShow = 6;
+var restStar = 3;
+var restSquare = 3;
+var restRhombus = 8;
+var restPentagon = 8;
+var restOctagon = 2;
+var restIce = 3;
+var restHot = 7;
+var restHexa = 8;
+var restHeptagon = 7;
+var restSouvenir = 3;
+var restGames = 5;
+var restEnter = 4;
+var restDodecagon = 9;
+var restDecagon = 6;
+var restConcave = 8;
+// show
+var showStar = 4;
+var showSquare = 6;
+var showRhombus = 6;
+var showPentagon = 4;
+var showOctagon = 7;
+var showIce = 6;
+var showHot = 4;
+var showHexa = 6;
+var showHeptagon = 2;
+var showSouvenir = 4;
+var showGames = 3;
+var showEnter = 3;
+var showDodecagon = 6;
+var showDecagon = 7;
+var showConcave = 7;
+// star
+var starSquare = 2;
+var starRhombus = 6;
+var starPentagon = 6;
+var starOctagon = 3;
+var starIce = 2;
+var starHot = 5;
+var starHexa = 6;
+var starHeptagon = 5;
+var starSouvenir = 2;
+var starGames = 3;
+var starEnter = 3;
+var starDodecagon = 7;
+var starDecagon = 5;
+var starConcave = 6;
+// square
+var squareRhombus= 6;
+var squarePentagon = 7;
+var squareOctagon = 3;
+var squareIce = 1;
+var squareHot = 5;
+var squareHexa = 5;
+var squareHeptagon = 6;
+var squareSouvenir = 4;
+var squareGames = 4;
+var squareEnter = 5;
+var squareDodecagon = 7;
+var squareDecagon = 3;
+var squareConcave = 5;
+// rhombus
+var rhombusPentagon = 3;
+var rhombusOctagon = 8;
+var rhombusIce = 6;
+var rhombusHot = 3;
+var rhombusHexa = 2;
+var rhombusHeptagon = 4;
+var rhombusSouvenir = 8;
+var rhombusGames = 4;
+var rhombusEnter = 8;
+var rhombusDodecagon = 2;
+var rhombusDecagon = 3;
+var rhombusConcave = 3;
+// pentagon
+var pentagonOctagon = 8;
+var pentagonIce = 7;
+var pentagonHot = 2;
+var pentagonHexa = 4;
+var pentagonHeptagon = 2;
+var pentagonSouvenir = 7;
+var pentagonGames = 4;
+var pentagonEnter = 7;
+var pentagonDodecagon = 2;
+var pentagonDecagon = 6;
+var pentagonConcave = 5;
+// octagon
+var octagonIce = 2;
+var octagonHot = 7;
+var octagonHexa = 8;
+var octagonHeptagon = 7;
+var octagonSouvenir = 3;
+var octagonGames = 5;
+var octagonEnter = 5;
+var octagonDodecagon = 9;
+var octagonDecagon = 6;
+var octagonConcave = 7;
+// ice
+var iceHot = 6;
+var iceHexa = 6;
+var iceHeptagon = 6;
+var iceSouvenir = 4;
+var iceGames = 4;
+var iceEnter = 5;
+var iceDodecagon = 8;
+var iceDecagon = 4;
+var iceConcave = 6;
+// hot
+var hotHexa = 3;
+var hotHeptagon = 2;
+var hotSouvenir = 6;
+var hotGames = 2;
+var hotEnter = 6;
+var hotDodecagon = 3;
+var hotDecagon = 4;
+var hotConcave = 4;
+// hexa
+var hexaHeptagon = 5;
+var hexaSouvenir = 8;
+var hexaGames = 4;
+var hexaEnter = 8;
+var hexaDodecagon = 3;
+var hexaDecagon = 2;
+var hexaConcave = 3;
+// heptagon
+var heptagonSouvenir = 6;
+var heptagonGames = 3;
+var heptagonEnter = 5;
+var heptagonDodecagon = 4;
+var heptagonDecagon = 6;
+var heptagonConcave = 6;
+// souvenir
+var souvenirGames = 4;
+var souvenirEnter = 2;
+var souvenirDodecagon = 8;
+var souvenirDecagon = 7;
+var souvenirCOncave = 8;
+// games
+var gamesEnter = 4;
+var gamesDodecagon = 5;
+var gamesDecagon = 4;
+var gamesConcave = 5;
+// enter
+var enterDodecagon = 8;
+var enterDecagon = 7;
+var enterConcave = 9;
+// dodecagon
+var dodecagonDecagon = 5;
+var dodecagonConcave = 4;
+// decagon
+var decagonConcave = 2;
+
+function heptagonScores() {
+	if (time === 9) {
+		return heptagon.rate - heptagon.wait.nineAM;
+	} else if (time === 10) {
+		return heptagon.rate - heptagon.wait.ten;
+	} else if (time === 11) {
+		return heptagon.rate - heptagon.wait.eleven;
+	} else if (time === 12) {
+		return heptagon.rate - heptagon.wait.twelve;
+	} else if (time === 13) {
+		return heptagon.rate - heptagon.wait.one;
+	} else if (time === 14) {
+		return heptagon.rate - heptagon.wait.two;
+	} else if (time === 15) {
+		return heptagon.rate - heptagon.wait.three;
+	} else if (time === 16) {
+		return heptagon.rate - heptagon.wait.four;
+	} else if (time === 17) {
+		return heptagon.rate - heptagon.wait.five;
+	} else if (time === 18) {
+		return heptagon.rate - heptagon.wait.six;
+	} else if (time === 19) {
+		return heptagon.rate - heptagon.wait.seven;
+	} else if (time === 20) {
+		return heptagon.rate - heptagon.wait.eight;
+	} else if (time === 21) {
+		return heptagon.rate - heptagon.wait.ninePM;
+	};
+};
+
+function decagonScores() {
+	if (time === 9) {
+		return decagon.rate - decagon.wait.nineAM;
+	} else if (time === 10) {
+		return decagon.rate - decagon.wait.ten;
+	} else if (time === 11) {
+		return decagon.rate - decagon.wait.eleven;
+	} else if (time === 12) {
+		return decagon.rate - decagon.wait.twelve;
+	} else if (time === 13) {
+		return decagon.rate - decagon.wait.one;
+	} else if (time === 14) {
+		return decagon.rate - decagon.wait.two;
+	} else if (time === 15) {
+		return decagon.rate - decagon.wait.three;
+	} else if (time === 16) {
+		return decagon.rate - decagon.wait.four;
+	} else if (time === 17) {
+		return decagon.rate - decagon.wait.five;
+	} else if (time === 18) {
+		return decagon.rate - decagon.wait.six;
+	} else if (time === 19) {
+		return decagon.rate - decagon.wait.seven;
+	} else if (time === 20) {
+		return decagon.rate - decagon.wait.eight;
+	} else if (time === 21) {
+		return decagon.rate - decagon.wait.ninePM;
+	};
+};
+
+function rhombusScores() {
+	if (time === 9) {
+		return rhombus.rate - rhombus.wait.nineAM;
+	} else if (time === 10) {
+		return rhombus.rate - rhombus.wait.ten;
+	} else if (time === 11) {
+		return rhombus.rate - rhombus.wait.eleven;
+	} else if (time === 12) {
+		return rhombus.rate - rhombus.wait.twelve;
+	} else if (time === 13) {
+		return rhombus.rate - rhombus.wait.one;
+	} else if (time === 14) {
+		return rhombus.rate - rhombus.wait.two;
+	} else if (time === 15) {
+		return rhombus.rate - rhombus.wait.three;
+	} else if (time === 16) {
+		return rhombus.rate - rhombus.wait.four;
+	} else if (time === 17) {
+		return rhombus.rate - rhombus.wait.five;
+	} else if (time === 18) {
+		return rhombus.rate - rhombus.wait.six;
+	} else if (time === 19) {
+		return rhombus.rate - rhombus.wait.seven;
+	} else if (time === 20) {
+		return rhombus.rate - rhombus.wait.eight;
+	} else if (time === 21) {
+		return rhombus.rate - rhombus.wait.ninePM;
+	};
+};
+
+function hexaScores() {
+	if (time === 9) {
+		return hexa.rate - hexa.wait.nineAM;
+	} else if (time === 10) {
+		return hexa.rate - hexa.wait.ten;
+	} else if (time === 11) {
+		return hexa.rate - hexa.wait.eleven;
+	} else if (time === 12) {
+		return hexa.rate - hexa.wait.twelve;
+	} else if (time === 13) {
+		return hexa.rate - hexa.wait.one;
+	} else if (time === 14) {
+		return hexa.rate - hexa.wait.two;
+	} else if (time === 15) {
+		return hexa.rate - hexa.wait.three;
+	} else if (time === 16) {
+		return hexa.rate - hexa.wait.four;
+	} else if (time === 17) {
+		return hexa.rate - hexa.wait.five;
+	} else if (time === 18) {
+		return hexa.rate - hexa.wait.six;
+	} else if (time === 19) {
+		return hexa.rate - hexa.wait.seven;
+	} else if (time === 20) {
+		return hexa.rate - hexa.wait.eight;
+	} else if (time === 21) {
+		return hexa.rate - hexa.wait.ninePM;
+	}
+};
+
+function pentagonScores() {
+	if (time === 9) {
+		return pentagon.rate - pentagon.wait.nineAM;
+	} else if (time === 10) {
+		return pentagon.rate - pentagon.wait.ten;
+	} else if (time === 11) {
+		return pentagon.rate - pentagon.wait.eleven;
+	} else if (time === 12) {
+		return pentagon.rate - pentagon.wait.twelve;
+	} else if (time === 13) {
+		return pentagon.rate - pentagon.wait.one;
+	} else if (time === 14) {
+		return pentagon.rate - pentagon.wait.two;
+	} else if (time === 15) {
+		return pentagon.rate - pentagon.wait.three;
+	} else if (time === 16) {
+		return pentagon.rate - pentagon.wait.four;
+	} else if (time === 17) {
+		return pentagon.rate - pentagon.wait.five;
+	} else if (time === 18) {
+		return pentagon.rate - pentagon.wait.six;
+	} else if (time === 19) {
+		return pentagon.rate - pentagon.wait.seven;
+	} else if (time === 20) {
+		return pentagon.rate - pentagon.wait.eight;
+	} else if (time === 21) {
+		return pentagon.rate - pentagon.wait.ninePM;
+	};
+};
+
+function squareScores() {
+	if (time === 9) {
+		return square.rate - square.wait.nineAM;
+	} else if (time === 10) {
+		return square.rate - square.wait.ten;
+	} else if (time === 11) {
+		return square.rate - square.wait.eleven;
+	} else if (time === 12) {
+		return square.rate - square.wait.twelve;
+	} else if (time === 13) {
+		return square.rate - square.wait.one;
+	} else if (time === 14) {
+		return square.rate - square.wait.two;
+	} else if (time === 15) {
+		return square.rate - square.wait.three;
+	} else if (time === 16) {
+		return square.rate - square.wait.four;
+	} else if (time === 17) {
+		return square.rate - square.wait.five;
+	} else if (time === 18) {
+		return square.rate - square.wait.six;
+	} else if (time === 19) {
+		return square.rate - square.wait.seven;
+	} else if (time === 20) {
+		return square.rate - square.wait.eight;
+	} else if (time === 21) {
+		return square.rate - square.wait.ninePM;
+	};
+};
+
+function concaveScores() {
+	if (time === 9) {
+		return concave.rate - concave.wait.nineAM;
+	} else if (time === 10) {
+		return concave.rate - concave.wait.ten;
+	} else if (time === 11) {
+		return concave.rate - concave.wait.eleven;
+	} else if (time === 12) {
+		return concave.rate - concave.wait.twelve;
+	} else if (time === 13) {
+		return concave.rate - concave.wait.one;
+	} else if (time === 14) {
+		return concave.rate - concave.wait.two;
+	} else if (time === 15) {
+		return concave.rate - concave.wait.three;
+	} else if (time === 16) {
+		return concave.rate - concave.wait.four;
+	} else if (time === 17) {
+		return concave.rate - concave.wait.five;
+	} else if (time === 18) {
+		return concave.rate - concave.wait.six;
+	} else if (time === 19) {
+		return concave.rate - concave.wait.seven;
+	} else if (time === 20) {
+		return concave.rate - concave.wait.eight;
+	} else if (time === 21) {
+		return concave.rate - concave.wait.ninePM;
+	};
+};
+
+function starScores() {
+	if (time === 9) {
+		return star.rate - star.wait.nineAM;
+	} else if (time === 10) {
+		return star.rate - star.wait.ten;
+	} else if (time === 11) {
+		return star.rate - star.wait.eleven;
+	} else if (time === 12) {
+		return star.rate - star.wait.twelve;
+	} else if (time === 13) {
+		return star.rate - star.wait.one;
+	} else if (time === 14) {
+		return star.rate - star.wait.two;
+	} else if (time === 15) {
+		return star.rate - star.wait.three;
+	} else if (time === 16) {
+		return star.rate - star.wait.four;
+	} else if (time === 17) {
+		return star.rate - star.wait.five;
+	} else if (time === 18) {
+		return star.rate - star.wait.six;
+	} else if (time === 19) {
+		return star.rate - star.wait.seven;
+	} else if (time === 20) {
+		return star.rate - star.wait.eight;
+	} else if (time === 21) {
+		return star.rate - star.wait.ninePM;
+	};
+};
+
+function dodecagonScores() {
+	if (time === 9) {
+		return dodecagon.rate - dodecagon.wait.nineAM;
+	} else if (time === 10) {
+		return dodecagon.rate - dodecagon.wait.ten;
+	} else if (time === 11) {
+		return dodecagon.rate - dodecagon.wait.eleven;
+	} else if (time === 12) {
+		return dodecagon.rate - dodecagon.wait.twelve;
+	} else if (time === 13) {
+		return dodecagon.rate - dodecagon.wait.one;
+	} else if (time === 14) {
+		return dodecagon.rate - dodecagon.wait.two;
+	} else if (time === 15) {
+		return dodecagon.rate - dodecagon.wait.three;
+	} else if (time === 16) {
+		return dodecagon.rate - dodecagon.wait.four;
+	} else if (time === 17) {
+		return dodecagon.rate - dodecagon.wait.five;
+	} else if (time === 18) {
+		return dodecagon.rate - dodecagon.wait.six;
+	} else if (time === 19) {
+		return dodecagon.rate - dodecagon.wait.seven;
+	} else if (time === 20) {
+		return dodecagon.rate - dodecagon.wait.eight;
+	} else if (time === 21) {
+		return dodecagon.rate - dodecagon.wait.ninePM;
+	};
+};
+
+function octagonScores() {
+	if (time === 9) {
+		return octagon.rate - octagon.wait.nineAM;
+	} else if (time === 10) {
+		return octagon.rate - octagon.wait.ten;
+	} else if (time === 11) {
+		return octagon.rate - octagon.wait.eleven;
+	} else if (time === 12) {
+		return octagon.rate - octagon.wait.twelve;
+	} else if (time === 13) {
+		return octagon.rate - octagon.wait.one;
+	} else if (time === 14) {
+		return octagon.rate - octagon.wait.two;
+	} else if (time === 15) {
+		return octagon.rate - octagon.wait.three;
+	} else if (time === 16) {
+		return octagon.rate - octagon.wait.four;
+	} else if (time === 17) {
+		return octagon.rate - octagon.wait.five;
+	} else if (time === 18) {
+		return octagon.rate - octagon.wait.six;
+	} else if (time === 19) {
+		return octagon.rate - octagon.wait.seven;
+	} else if (time === 20) {
+		return octagon.rate - octagon.wait.eight;
+	} else if (time === 21) {
+		return octagon.rate - octagon.wait.ninePM;
+	};
+};
+
+function hotScores() {
+	if (time === 9) {
+		return hot.rate - hot.wait.nineAM;
+	} else if (time === 10) {
+		return hot.rate - hot.wait.ten;
+	} else if (time === 11) {
+		return hot.rate - hot.wait.eleven;
+	} else if (time === 12) {
+		return hot.rate - hot.wait.twelve;
+	} else if (time === 13) {
+		return hot.rate - hot.wait.one;
+	} else if (time === 14) {
+		return hot.rate - hot.wait.two;
+	} else if (time === 15) {
+		return hot.rate - hot.wait.three;
+	} else if (time === 16) {
+		return hot.rate - hot.wait.four;
+	} else if (time === 17) {
+		return hot.rate - hot.wait.five;
+	} else if (time === 18) {
+		return hot.rate - hot.wait.six;
+	} else if (time === 19) {
+		return hot.rate - hot.wait.seven;
+	} else if (time === 20) {
+		return hot.rate - hot.wait.eight;
+	} else if (time === 21) {
+		return hot.rate - hot.wait.ninePM;
+	};
+};
+
+function iceScores() {
+	if (time === 9) {
+		return ice.rate - ice.wait.nineAM;
+	} else if (time === 10) {
+		return ice.rate - ice.wait.ten;
+	} else if (time === 11) {
+		return ice.rate - ice.wait.eleven;
+	} else if (time === 12) {
+		return ice.rate - ice.wait.twelve;
+	} else if (time === 13) {
+		return ice.rate - ice.wait.one;
+	} else if (time === 14) {
+		return ice.rate - ice.wait.two;
+	} else if (time === 15) {
+		return ice.rate - ice.wait.three;
+	} else if (time === 16) {
+		return ice.rate - ice.wait.four;
+	} else if (time === 17) {
+		return ice.rate - ice.wait.five;
+	} else if (time === 18) {
+		return ice.rate - ice.wait.six;
+	} else if (time === 19) {
+		return ice.rate - ice.wait.seven;
+	} else if (time === 20) {
+		return ice.rate - ice.wait.eight;
+	} else if (time === 21) {
+		return ice.rate - ice.wait.ninePM;
+	};
+};
+
+function restScores() {
+	if (time === 9) {
+		return rest.rate - rest.wait.nineAM;
+	} else if (time === 10) {
+		return rest.rate - rest.wait.ten;
+	} else if (time === 11) {
+		return rest.rate - rest.wait.eleven;
+	} else if (time === 12) {
+		return rest.rate - rest.wait.twelve;
+	} else if (time === 13) {
+		return rest.rate - rest.wait.one;
+	} else if (time === 14) {
+		return rest.rate - rest.wait.two;
+	} else if (time === 15) {
+		return rest.rate - rest.wait.three;
+	} else if (time === 16) {
+		return rest.rate - rest.wait.four;
+	} else if (time === 17) {
+		return rest.rate - rest.wait.five;
+	} else if (time === 18) {
+		return rest.rate - rest.wait.six;
+	} else if (time === 19) {
+		return rest.rate - rest.wait.seven;
+	} else if (time === 20) {
+		return rest.rate - rest.wait.eight;
+	} else if (time === 21) {
+		return rest.rate - rest.wait.ninePM;
+	};
+};
+
+function getData() {
+	
+	if (checkExtreme()) {
+		heptagon.rate = 5;
+		decagon.rate = 5;
+		rhombus.rate = 5;
+	} else if (!checkExtreme()) {
+		heptagon.rate = 1;
+		decagon.rate = 1;
+		rhombus.rate = 1;
+	};
+	if (checkMedium()) {
+		hexa.rate = 5;
+		pentagon.rate = 5;
+		square.rate = 5;
+	} else if (!checkMedium()) {
+		hexa.rate = 1;
+		pentagon.rate = 1;
+		square.rate = 1;
+	};
+	if (checkBasic()) {
+		concave.rate = 5;
+		star.rate = 5;
+	} else if (!checkBasic()) {
+		concave.rate = 1;
+		star.rate = 1;
+	};
+	if (checkWater()) {
+		dodecagon.rate = 5;
+		octagon.rate = 5;
+	} else if (!checkWater()) {
+		dodecagon.rate = 1;
+		octagon.rate = 1;
+	};
+	if (checkHot()) {
+		hot.rate = 5;
+	} else if (!checkHot()) {
+		hot.rate = 1;
+	};
+	if (checkIce()) {
+		ice.rate = 5;
+	} else if (!checkIce()) {
+		ice.rate = 1;
+	};
+	if (checkRest()) {
+		rest.rate = 5;
+	} else if (!checkRest()) {
+		rest.rate = 1;
+	};
+	if (checkGames()) {
+		games.rate = 5;
+	} else if (!checkGames()) {
+		games.rate = 1;
+	};
+	if (checkSouvenir()) {
+		souvenir.rate = 5;
+	} else if (!checkSouvenir()) {
+		souvenir.rate = 1;
+	};
+	if (checkFirework()) {
+		firework.rate = 5;
+	} else if (!checkFirework()) {
+		firework.rate = 1;
+	};
+	if (checkMagic()) {
+		magic.rate = 5;
+	} else if (!checkMagic()) {
+		magic.rate = 1;
+	};
+	if (checkCircus()) {
+		circus.rate = 5;
+	} else if (!checkCircus()) {
+		circus.rate = 1;
+	};
+	
+	$("#todo").append("<br /><b>BASIC SCHEDULE: </b><br />");
+	$("#todo").append("enter <br />");
+	var services = [heptagonScores(), decagonScores(), rhombusScores(), hexaScores(), pentagonScores(), squareScores(), concaveScores(), starScores(), dodecagonScores(), octagonScores()];
+	// var bestService = Math.max.apply(Math.max, services);
+	// var serviceNames = ["Heptagon Coaster", "Decagon Coaster", "Rhombus Ride", "Hexa-Swings", "Pentagon Bumpers", "Square Scramble", "Concave Train", "Starburst Carousel", "Dodecagon Rapids", "Octagon Flume"];
+	// var bestServiceName = serviceNames[services.indexOf(bestService)];
+	if (heptagon.rate === 5) {
+		$("#todo").append("Heptagon Coaster<br />")
+	};
+	if (decagon.rate === 5) {
+		$("#todo").append("Decagon Coaster<br />")
+	};
+	if (rhombus.rate === 5) {
+		$("#todo").append("Rhombus Ride<br />")
+	};
+	if (hexa.rate === 5) {
+		$("#todo").append("Hexa-Swings<br />")
+	};
+	if (pentagon.rate === 5) {
+		$("#todo").append("Pentagon Bumpers<br />")
+	};
+	if (square.rate === 5) {
+		$("#todo").append("Square Scramble<br />")
+	};
+	if (concave.rate === 5) {
+		$("#todo").append("Concve Train<br />")
+	};
+	if (star.rate === 5) {
+		$("#todo").append("Starburst Carousel<br />")
+	};
+	if (dodecagon.rate === 5) {
+		$("#todo").append("Dodecagon Rapids<br />")
+	};
+	if (octagon.rate === 5) {
+		$("#todo").append("Octagon Flume<br />")
+	};
+	if (octagon.rate === 5) {
+		$("#todo").append("Octagon Flume<br />")
+	};
+	if (hot.rate === 5) {
+		$("#todo").append("Hot Dogs<br />")
+	};
+	if (ice.rate === 5) {
+		$("#todo").append("Ice Cream<br />")
+	};
+	if (rest.rate === 5) {
+		$("#todo").append("Triangle Restaurant<br />")
+	};
+	if (souvenir.rate === 5) {
+		$("#todo").append("Gift Shop<br />")
+	};
+	if (firework.rate === 5) {
+		$("#todo").append("Firework show<br />")
+	};
+	if (magic.rate === 5) {
+		$("#todo").append("Magic Show<br />")
+	};
+	if (circus.rate === 5) {
+		$("#todo").append("Circus / Acrobatics Show<br />")
+	};
+	// function schedule(time) {
+	// 	if (time >= 21) {
+	// 		clearInterval(interval);
+	// 	}
+	// 	var services = [heptagonScores(), decagonScores(), rhombusScores(), hexaScores(), pentagonScores(), squareScores(), concaveScores(), starScores(), dodecagonScores(), octagonScores()];
+	// 	var bestService = Math.max.apply(Math.max, services);
+	// 	var serviceNames = ["Heptagon Coaster", "Decagon Coaster", "Rhombus Ride", "Hexa-Swings", "Pentagon Bumpers", "Square Scramble", "Concave Train", "Starburst Carousel", "Dodecagon Rapids", "Octagon Flume"];
+	// 	var bestServiceName = serviceNames[services.indexOf(bestService)];
+	// 	$("#todo").append(bestServiceName);
+	// 	if (bestServiceName === "Heptagon Coaster") {
+	// 		time += (heptagonEnter/60);
+	// 		time += (heptagon.duration/60);
+	// 		return time;
+	// 	} else if (bestServiceName === "Decagon Coaster") {
+	// 		time += (enterDecagon/60);
+	// 		time += (decagon.duration/60);
+	// 		return time;
+	// 	} else if (bestServiceName === "Rhombus Ride") {
+	// 		time += (rhombusEnter/60);
+	// 		time += (rhombus.duration/60);
+	// 		return time;
+	// 	} else if (bestServiceName === "Hexa-Swings") {
+	// 		time += (hexaEnter/60);
+	// 		time += (hexa.duration/60);
+	// 		return time;
+	// 	} else if (bestServiceName === "Pentagon Bumpers") {
+	// 		time += (pentagonEnter/60);
+	// 		time += (pentagon.duration/60);
+	// 		return time;
+	// 	} else if (bestServiceName === "Square Scramble") {
+	// 		time += (squareEnter/60);
+	// 		time += (aquare.duration/60);
+	// 		return time;
+	// 	} else if (bestServiceName === "Concave Train") {
+	// 		time += (enterConcave/60);
+	// 		time += (concave.duration/60);
+	// 		return time;
+	// 	} else if (bestServiceName === "Starburst Carousel") {
+	// 		time += (starEnter/60);
+	// 		time += (star.duration/60);
+	// 		return time;
+	// 	} else if (bestServiceName === "Dodecagon Rapids") {
+	// 		time += (enterDodecagon/60);
+	// 		time += (dodecagon.duration/60);
+	// 		return time;
+	// 	} else if (bestServiceName === "Octagon Flume") {
+	// 		time += (octagonEnter/60);
+	// 		time += (octagon.duration/60);
+	// 		return time;
+	// 	};
+	// };
+	// time += schedule(time);
+	// var interval = setInterval(schedule, 1);
+};
+		</script>
+		<noscript>
+			<h1 style="color: 'red';">TURN JAVASCRIPT ON</h1>
+		</noscript>
+	</body>
+</html>
